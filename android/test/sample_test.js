@@ -18,13 +18,16 @@ async function bstackSampleTest() {
       .click();
     console.log("Element found and clicked successfully.");
 
-    // Locate the TextView representing the badge count
+    // Locate the ion-badge representing the badge count
     const badgeCountElement = await driver.wait(
       until.elementLocated(
-        By.xpath('//android.widget.TextView[@text="1"]'),
+        By.xpath('//ion-badge[@data-test="notification-badge"]'),
         30000
       )
     );
+
+    // Wait for the badge count element to be visible
+    await driver.wait(until.elementIsVisible(badgeCountElement), 30000);
 
     // Get the text of the badge count
     const badgeCountText = await badgeCountElement.getText();
@@ -35,7 +38,7 @@ async function bstackSampleTest() {
 
     await driver.sleep(5000);
 
-    const notificationSuccessMessage = true;
+    const notificationSuccessMessage = badgeCount > 0 ? true : false;
     if (notificationSuccessMessage) {
       console.log("Notification sent successfully.");
       await driver.executeScript(
