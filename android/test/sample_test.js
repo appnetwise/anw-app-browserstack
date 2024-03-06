@@ -35,18 +35,15 @@ async function bstackSampleTest() {
       badgeCount = parseInt(badgeCountText);
 
       // Assert the Badge Count
-      assert(badgeCount >= expectedBadgeCount, `Badge count is ${badgeCount}`);
+      assert(badgeCount > 0, `Badge count is ${badgeCount}`);
     } catch (error) {
-      // Handle the case where the badge is not visible or not found
       console.error("Badge not found or not visible:", error);
-
-      // Optionally, you can set badgeCount to a default value or perform additional actions
       badgeCount = 0;
     }
 
     await driver.sleep(5000);
 
-    const notificationSuccessMessage = (badgeCount = 0 ? true : false);
+    const notificationSuccessMessage = badgeCount > 0 ? true : false;
     if (notificationSuccessMessage) {
       console.log("Notification sent successfully.");
       await driver.executeScript(
@@ -61,7 +58,7 @@ async function bstackSampleTest() {
   } catch (e) {
     console.error("Error in test:", e);
     await driver.executeScript(
-      'browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "Test execution error"}}'
+      'browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "Notification failed to send"}}'
     );
   } finally {
     if (driver) {
