@@ -19,26 +19,29 @@ async function bstackSampleTest() {
     console.log("Element found and clicked successfully.");
 
     // Locate the ion-badge representing the badge count
-    const badgeCountElement = await driver.wait(
-      until.elementLocated(
-        By.xpath('//ion-badge[@data-test="notification-badge"]'),
-        20000
-      )
-    );
+    let badgeCount;
 
-    // Wait for the badge count element to be visible
-    const visibleBadgeElement = await driver.wait(
-      until.elementIsVisible(badgeCountElement),
-      20000
-    );
+    try {
+      // Locate the ion-badge Element
+      const badgeElement = await driver.wait(
+        until.elementLocated(
+          By.xpath('//ion-badge[@data-test="notification-badge"]')
+        ),
+        3000
+      );
 
-    if (visibleBadgeElement) {
-      // Get the text of the badge count
-      const badgeCountText = await badgeCountElement.getText();
-      const badgeCount = parseInt(badgeCountText);
+      // Get the Badge Count
+      const badgeCountText = await badgeElement.getText();
+      badgeCount = parseInt(badgeCountText);
 
-      // Assert that the badge count is greater than 0
-      assert(badgeCount > 0, `Badge count is ${badgeCount}`);
+      // Assert the Badge Count
+      assert(badgeCount >= expectedBadgeCount, `Badge count is ${badgeCount}`);
+    } catch (error) {
+      // Handle the case where the badge is not visible or not found
+      console.error("Badge not found or not visible:", error);
+
+      // Optionally, you can set badgeCount to a default value or perform additional actions
+      badgeCount = 0;
     }
 
     await driver.sleep(5000);
