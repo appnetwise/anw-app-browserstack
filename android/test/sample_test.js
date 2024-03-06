@@ -13,7 +13,7 @@ async function bstackSampleTest() {
         until.elementLocated(
           By.xpath("//android.widget.Button[@text='GRAB A RIDE']")
         ),
-        30000
+        60000
       )
       .click();
     console.log("Element found and clicked successfully.");
@@ -27,7 +27,7 @@ async function bstackSampleTest() {
       )
       .getText();
 
-    //assert(textElement.includes("1"));
+    assert(textElement.includes("1"));
 
     await driver.sleep(5000);
 
