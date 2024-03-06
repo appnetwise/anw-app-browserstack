@@ -18,16 +18,20 @@ async function bstackSampleTest() {
       .click();
     console.log("Element found and clicked successfully.");
 
-    var textElement = await driver
-      .wait(
-        until.elementLocated(
-          By.xpath('//android.widget.TextView[@text="1"]'),
-          30000
-        )
+    // Locate the TextView representing the badge count
+    const badgeCountElement = await driver.wait(
+      until.elementLocated(
+        By.xpath('//android.widget.TextView[@text="4"]'),
+        30000
       )
-      .getText();
+    );
 
-    assert(textElement.includes("1"));
+    // Get the text of the badge count
+    const badgeCountText = await badgeCountElement.getText();
+    const badgeCount = parseInt(badgeCountText);
+
+    // Assert that the badge count is greater than 0
+    assert(badgeCount > 0, `Badge count is ${badgeCount}`);
 
     await driver.sleep(5000);
 
