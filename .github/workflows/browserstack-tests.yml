@@ -39,8 +39,8 @@ jobs:
 
       - name: Run Appium tests
         run: |
-          cd android  # Navigate to the 'android' subfolder
-          node sample_test.js
+          cd android/  # Navigate to the 'android' subfolder
+          npm run sample_test
 
       - name: Upload test report (optional)
         uses: actions/upload-artifact@v3
