@@ -1,0 +1,46 @@
+name: BrowserStack Mobile App Tests
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Create environment variables
+        env:
+          BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+          BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+        run: |
+          echo "BROWSERSTACK_USERNAME=$BROWSERSTACK_USERNAME" >> $GITHUB_ENV
+          echo "BROWSERSTACK_ACCESS_KEY=$BROWSERSTACK_ACCESS_KEY" >> $GITHUB_ENV
+
+      - name: Upload app to BrowserStack
+        run: |
+          curl -u "$BROWSERSTACK_USERNAME:$BROWSERSTACK_ACCESS_KEY" \
+          -X POST "https://api-cloud.browserstack.com/app-automate/upload" \
+          -F "url=bs://6abf0b080c5168ecd9218561cf056783f2561199" \
+          -F "custom_id=SampleApp" \
+          -F "ios_keychain_support=true"
+
+      - name: Run Appium tests
+        run: |
+          node sample_test.js
+
+      - name: Upload test report (optional)
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-report
+          path: test_report.html
