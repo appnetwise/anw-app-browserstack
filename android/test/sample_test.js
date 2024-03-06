@@ -21,7 +21,7 @@ async function bstackSampleTest() {
     // Locate the TextView representing the badge count
     const badgeCountElement = await driver.wait(
       until.elementLocated(
-        By.xpath('//android.widget.TextView[@text="4"]'),
+        By.xpath('//android.widget.TextView[@text="1"]'),
         30000
       )
     );
