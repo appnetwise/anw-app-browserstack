@@ -46,7 +46,7 @@ async function bstackSampleTest() {
 
     await driver.sleep(5000);
 
-    const notificationSuccessMessage = badgeCount > 0 ? true : false;
+    const notificationSuccessMessage = (badgeCount = 0 ? true : false);
     if (notificationSuccessMessage) {
       console.log("Notification sent successfully.");
       await driver.executeScript(
