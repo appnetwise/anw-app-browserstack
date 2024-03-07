@@ -1,10 +1,9 @@
 name: BrowserStack Mobile App Tests
 
 on:
-  workflow_run:
-    workflows: ["ANW Volta App Build APK"]
+  repository_dispatch:
     types:
-      - completed
+      - run-browserstack-tests
 
 jobs:
   test:
