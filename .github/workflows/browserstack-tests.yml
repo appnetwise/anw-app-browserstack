@@ -26,7 +26,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: app-debug
-          path: ./android
+         path: ./platforms/android/app/build/outputs/apk/debug
 
       - name: Set BrowserStack Credentials
         run: |
