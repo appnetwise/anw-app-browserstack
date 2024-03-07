@@ -22,13 +22,14 @@ jobs:
           cd android
           npm install
 
-      - name: Download APK
+     - name: Download APK
         uses: actions/download-artifact@v2
         with:
           name: app-debug
+          path: ./android
 
-      - name: List Contents
-        run: ls -R $GITHUB_WORKSPACE
+      - name: (Optional) Verify Downloaded File (optional)
+        run: ls -l ./android/app-debug.apk
 
       - name: Set BrowserStack Credentials
         run: |
