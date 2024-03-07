@@ -22,14 +22,11 @@ jobs:
           cd android
           npm install
 
-      - name: Platform Files
-        run: ls -R ./platforms/android/app/build/outputs/apk/debug/app-debug.apk
-
       - name: Download APK
         uses: actions/download-artifact@v2
         with:
           name: app-debug
-          path: ./platforms/android/app/build/outputs/apk/debug/app-debug.apk
+          path: ./platforms/android/app/build/outputs/apk/debug/
 
       - name: Set BrowserStack Credentials
         run: |
@@ -40,7 +37,7 @@ jobs:
         run: |
           curl -u "$BROWSERSTACK_USERNAME:$BROWSERSTACK_ACCESS_KEY" \
           -X POST "https://api-cloud.browserstack.com/app-automate/upload" \
-          -F "file=@./android/app-debug.apk" \
+          -F "file=@./platforms/android/app/build/outputs/apk/debug/app-debug.apk" \
           -F "custom_id=ANWVoltaApp" \
           -F "ios_keychain_support=true"
 
