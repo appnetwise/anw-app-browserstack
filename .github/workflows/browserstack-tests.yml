@@ -24,6 +24,9 @@ jobs:
 
       - name: Download APK
         uses: actions/download-artifact@v3
+        with:
+          name: volta-app
+          path: ./android
 
       - name: List Files
         run: ls -R
