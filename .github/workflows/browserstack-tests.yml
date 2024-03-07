@@ -26,7 +26,7 @@ jobs:
       - name: Download APK
         uses: actions/download-artifact@v4
         with:
-          name: volta-app
+          name: volta_app
           path: ./android
           repository: appnetwise/anw-voltaapp
           github-token: ${{ secrets.PAS_TOKEN }}
