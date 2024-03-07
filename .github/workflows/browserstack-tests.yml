@@ -27,6 +27,7 @@ jobs:
         with:
           name: app-debug
           path: ./android
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set BrowserStack Credentials
         run: |
