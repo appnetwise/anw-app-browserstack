@@ -22,7 +22,7 @@ jobs:
           cd android
           npm install
 
-     - name: Download APK
+      - name: Download APK
         uses: actions/download-artifact@v2
         with:
           name: app-debug
