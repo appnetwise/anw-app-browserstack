@@ -29,7 +29,7 @@ jobs:
           # name: volta-app
           # path: ./android
           repository: appnetwise/anw-voltaapp
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.PAS_TOKEN }}
 
       - name: List Files
         run: ls -R
