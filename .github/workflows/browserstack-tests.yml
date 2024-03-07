@@ -21,8 +21,8 @@ jobs:
         run: |
           cd android
           npm install
-      
-      name: Platform Files
+
+      - name: Platform Files
         run: ls -R $GITHUB_WORKSPACE/platforms/app/build/outputs/apk/debug
 
       - name: Download APK
