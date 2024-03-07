@@ -33,8 +33,8 @@ jobs:
         run: |
           curl -u "$BROWSERSTACK_USERNAME:$BROWSERSTACK_ACCESS_KEY" \
           -X POST "https://api-cloud.browserstack.com/app-automate/upload" \
-          -F "url=bs://6abf0b080c5168ecd9218561cf056783f2561199" \
-          -F "custom_id=SampleApp" \
+          -F "file=@./app-debug.apk" \
+          -F "custom_id=ANWVoltaApp" \
           -F "ios_keychain_support=true"
 
       - name: Run Appium tests
