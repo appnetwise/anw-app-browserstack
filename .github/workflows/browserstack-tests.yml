@@ -1,5 +1,4 @@
 name: BrowserStack Mobile App Tests
-
 on:
   repository_dispatch:
     types:
