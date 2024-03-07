@@ -22,14 +22,17 @@ jobs:
           cd android
           npm install
 
-      - name: Create Android Directory
-        run: mkdir -p ./android
+      # - name: Create Android Directory
+      #   run: mkdir -p ./android
 
       - name: Download APK
         uses: actions/download-artifact@v2
         with:
           name: app-debug
-          path: ./android
+          path: .
+
+      - name: Move APK to Android Directory
+        run: mv app-debug ./android
 
       - name: Set BrowserStack Credentials
         run: |
