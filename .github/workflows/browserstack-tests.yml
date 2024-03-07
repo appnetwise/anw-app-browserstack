@@ -28,6 +28,8 @@ jobs:
         with:
           name: volta-app
           path: ./android
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: List Files
         run: ls -R
