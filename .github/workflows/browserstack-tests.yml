@@ -3,8 +3,6 @@ on:
   repository_dispatch:
     types:
       - run-browserstack-tests
-  push:
-    branches: [master]
 
 jobs:
   test:
@@ -23,21 +21,20 @@ jobs:
           cd android
           npm install
 
-      # - name: Download APK
-      #   uses: actions/download-artifact@v4
-      #   with:
-      #     name: voltaapp
-      #     path: ./android
-      #     repository: appnetwise/anw-voltaapp
-      #     run-id: ${{ github.event.client_payload.run_id }}
-      #     # run-id: 8196898714
-      #     github-token: ${{ secrets.PAS_TOKEN }}
+      - name: Download APK
+        uses: actions/download-artifact@v4
+        with:
+          name: voltaapp
+          path: ./android
+          repository: appnetwise/anw-voltaapp
+          run-id: ${{ github.event.client_payload.run_id }}
+          github-token: ${{ secrets.PAS_TOKEN }}
 
-      # - name: List Files
-      #   run: ls -R
+      - name: List Files
+        run: ls -R
 
-      # - name: (Optional) Verify Downloaded File (optional)
-      #   run: ls -l ./android/app-debug.apk
+      - name: (Optional) Verify Downloaded File (optional)
+        run: ls -l ./android/app-debug.apk
 
       - name: Create environment variables
         env:
