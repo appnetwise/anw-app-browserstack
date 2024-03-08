@@ -23,17 +23,13 @@ jobs:
           cd android
           npm install
 
-      - name: Set Run ID Output
-        id: set_run_id
-        run: echo "source_run_id=${{ github.event.client_payload.run_id }}" >> $GITHUB_ENV
-
       - name: Download APK
         uses: actions/download-artifact@v4
         with:
           name: voltaapp
           path: ./android
           repository: appnetwise/anw-voltaapp
-          run-id: ${{ source_run_id }}
+          run-id: ${{ github.event.client_payload.run_id }}
           # run-id: 8196898714
           github-token: ${{ secrets.PAS_TOKEN }}
 
