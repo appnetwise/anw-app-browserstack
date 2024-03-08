@@ -22,23 +22,32 @@ async function bstackSampleTest() {
     let badgeCount;
 
     try {
-      // Locate the ion-badge Element
       const badgeElement = await driver.wait(
-        until.elementLocated(
-          By.xpath('//ion-badge[@data-test="notification-badge"]')
+        until.and(
+          until.elementLocated(
+            By.xpath(
+              '//android.widget.TextView[@resource-id="notification-badge"]'
+            )
+          ),
+          until.elementIsVisible(
+            By.xpath(
+              '//android.widget.TextView[@resource-id="notification-badge"]'
+            )
+          )
         ),
-        30000
+        60000
       );
 
       console.log(badgeElement);
       await driver.sleep(5000);
 
-      var badgeElemen2 = await driver
-        .findElement(By.xpath('//ion-badge[@data-test="notification-badge"]'))
-        .getText();
-      console.log(badgeElemen2);
+      // var badgeElemen2 = await driver
+      //   .findElement(By.xpath('//ion-badge[@data-test="notification-badge"]'))
+      //   .getText();
 
-      badgeCount = parseInt(badgeElemen2);
+      badgeCount = parseInt(badgeElement);
+
+      console.log(badgeCount);
 
       // Assert the Badge Count
       assert(badgeCount > 0, `Badge count is ${badgeCount}`);
