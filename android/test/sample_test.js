@@ -21,22 +21,28 @@ async function bstackSampleTest() {
     // Locate the ion-badge representing the badge count
     let badgeCount;
 
+    // try {
+    //   const badgeElement = await driver.wait(
+    //     until.elementLocated(
+    //       By.xpath(
+    //         '//android.widget.TextView[@resource-id="notification-badge"]'
+    //       )
+    //     ),
+    //     60000
+    //   );
+
+    //   console.log(badgeElement);
+    //   await driver.sleep(5000);
     try {
-      const badgeElement = await driver.wait(
-        until.elementLocated(
+      var badgeElement = await driver
+        .findElement(
           By.xpath(
             '//android.widget.TextView[@resource-id="notification-badge"]'
           )
-        ),
-        60000
-      );
+        )
+        .getText();
 
       console.log(badgeElement);
-      await driver.sleep(5000);
-
-      // var badgeElemen2 = await driver
-      //   .findElement(By.xpath('//ion-badge[@data-test="notification-badge"]'))
-      //   .getText();
 
       badgeCount = parseInt(badgeElement);
 
