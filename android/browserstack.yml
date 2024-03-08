@@ -27,8 +27,8 @@ source: node:appium-sample-sdk:v1.0
 
 # Set `app` to define the app that is to be used for testing.
 # It can either take the id of any uploaded app or the path of the app directly.
-app: bs://6abf0b080c5168ecd9218561cf056783f2561199
-# app: ./LocalSample.apk #For running local tests
+# app: bs://6abf0b080c5168ecd9218561cf056783f2561199
+app: ./app-debug.apk
 
 # =======================================
 # Platforms (Browsers / Devices to test)
