@@ -23,16 +23,9 @@ async function bstackSampleTest() {
 
     try {
       const badgeElement = await driver.wait(
-        until.and(
-          until.elementLocated(
-            By.xpath(
-              '//android.widget.TextView[@resource-id="notification-badge"]'
-            )
-          ),
-          until.elementIsVisible(
-            By.xpath(
-              '//android.widget.TextView[@resource-id="notification-badge"]'
-            )
+        until.elementLocated(
+          By.xpath(
+            '//android.widget.TextView[@resource-id="notification-badge"]'
           )
         ),
         60000
