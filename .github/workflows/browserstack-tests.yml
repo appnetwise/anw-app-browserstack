@@ -23,13 +23,17 @@ jobs:
           cd android
           npm install
 
+      - name: Set Run ID Output
+        id: set_run_id
+        run: echo "::set-output name=source_run_id::$(cat run-id.txt)"
+
       - name: Download APK
         uses: actions/download-artifact@v4
         with:
           name: voltaapp
           path: ./android
           repository: appnetwise/anw-voltaapp
-          run-id: ${{ steps.get_source_run_id.outputs.source_run_id }}
+          run-id: ${{ steps.set_run_id.outputs.source_run_id }}
           # run-id: 8196898714
           github-token: ${{ secrets.PAS_TOKEN }}
 
