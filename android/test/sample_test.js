@@ -32,7 +32,7 @@ async function bstackSampleTest() {
     //   );
 
     //   console.log(badgeElement);
-    //   await driver.sleep(5000);
+    await driver.sleep(5000);
     try {
       var badgeElement = await driver
         .findElement(
