@@ -3,8 +3,8 @@ on:
   repository_dispatch:
     types:
       - run-browserstack-tests
-  push:
-    branches: [master]
+  # push:
+  #   branches: [master]
 
 jobs:
   test:
@@ -23,12 +23,23 @@ jobs:
           cd android
           npm install
 
+      - name: Get Source Workflow Run ID
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.actions.getWorkflowRunIdByRef({ repo: 'appnetwise/anw-voltaapp', ref: '${{ github.ref }}' })
+            .then(runId => core.setOutput('source_run_id', runId))
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Download APK
         uses: actions/download-artifact@v4
         with:
           name: voltaapp
+          path: ./android
           repository: appnetwise/anw-voltaapp
-          run-id: 8196898714
+          run-id: ${{ steps.get_source_run_id.outputs.source_run_id }}
+          # run-id: 8196898714
           github-token: ${{ secrets.PAS_TOKEN }}
 
       - name: List Files
@@ -46,7 +57,7 @@ jobs:
         run: |
           curl -u "$BROWSERSTACK_USERNAME:$BROWSERSTACK_ACCESS_KEY" \
           -X POST "https://api-cloud.browserstack.com/app-automate/upload" \
-          -F "file=@./platforms/android/app/build/outputs/apk/debug/app-debug.apk" \
+          -F "file=@./android/app-debug.apk" \
           -F "custom_id=ANWVoltaApp" \
           -F "ios_keychain_support=true"
 
