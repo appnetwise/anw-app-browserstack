@@ -27,12 +27,18 @@ async function bstackSampleTest() {
         until.elementLocated(
           By.xpath('//ion-badge[@data-test="notification-badge"]')
         ),
-        3000
+        30000
       );
 
-      // Get the Badge Count
-      const badgeCountText = await badgeElement.getText();
-      badgeCount = parseInt(badgeCountText);
+      console.log(badgeElement);
+      await driver.sleep(5000);
+
+      var badgeElemen2 = await driver
+        .findElement(By.xpath('//ion-badge[@data-test="notification-badge"]'))
+        .getText();
+      console.log(badgeElemen2);
+
+      badgeCount = parseInt(badgeElemen2);
 
       // Assert the Badge Count
       assert(badgeCount > 0, `Badge count is ${badgeCount}`);
