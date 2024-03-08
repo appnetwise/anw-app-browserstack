@@ -1,4 +1,5 @@
 const { Builder, By, until } = require("selenium-webdriver");
+const assert = require("assert");
 
 var buildDriver = function () {
   return new Builder().usingServer("http://127.0.0.1:4723/wd/hub").build();
@@ -21,30 +22,17 @@ async function bstackSampleTest() {
     // Locate the ion-badge representing the badge count
     let badgeCount;
 
-    // try {
-    //   const badgeElement = await driver.wait(
-    //     until.elementLocated(
-    //       By.xpath(
-    //         '//android.widget.TextView[@resource-id="notification-badge"]'
-    //       )
-    //     ),
-    //     60000
-    //   );
-
-    //   console.log(badgeElement);
-    await driver.sleep(5000);
     try {
-      var badgeElement = await driver
-        .findElement(
+      const badgeElement = await driver.wait(
+        until.elementLocated(
           By.xpath(
             '//android.widget.TextView[@resource-id="notification-badge"]'
           )
-        )
-        .getText();
+        ),
+        60000
+      );
 
-      console.log(badgeElement);
-
-      badgeCount = parseInt(badgeElement);
+      badgeCount = parseInt(await badgeElement.getText());
 
       console.log(badgeCount);
 
