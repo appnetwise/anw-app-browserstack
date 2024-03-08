@@ -23,15 +23,6 @@ jobs:
           cd android
           npm install
 
-      - name: Get Source Workflow Run ID
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.actions.getWorkflowRunIdByRef({ repo: 'appnetwise/anw-voltaapp', ref: '${{ github.ref }}' })
-            .then(runId => core.setOutput('source_run_id', runId))
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Download APK
         uses: actions/download-artifact@v4
         with:
