@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Install Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
@@ -26,9 +26,9 @@ jobs:
       - name: Download APK
         uses: actions/download-artifact@v4
         with:
-          name: volta_app
-          path: ./android
+          name: voltaapp
           repository: appnetwise/anw-voltaapp
+          run-id: ${{ github.event.workflow_run.id }}
           github-token: ${{ secrets.PAS_TOKEN }}
 
       - name: List Files
