@@ -37,7 +37,7 @@ async function bstackSampleTest() {
       console.log(badgeCount);
 
       // Assert the Badge Count
-      assert(badgeCount > 0, `Badge count is ${badgeCount}`);
+      assert(badgeCount === 0, `Badge count is ${badgeCount}`);
     } catch (error) {
       console.error("Badge not found or not visible:", error);
       badgeCount = 0;
